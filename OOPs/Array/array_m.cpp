@@ -19,6 +19,11 @@ int main()
     //cout<<"The Resultant array is"<<endl;
     //a3.display();
     cout<<a3;
-    
+    Array a4 = a1 - a2;
+    cout<<"After substraction"<<endl;
+    cout<<a4;
+    Array a5 = a1 * a2;
+    cout<<"After multiplication"<<endl;
+    cout<<a5;
     return 0;
 }
