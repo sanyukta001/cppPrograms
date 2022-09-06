@@ -2,48 +2,121 @@
 
 Matrix::Matrix(int r,int c)
 {
-    r_size = r;
-    c_size = c;
-    arr = (int**)malloc(sizeof(int)*r_size);
-    for (int i = 0; i < r_size; i++)
-    {
-        *(arr+i) = (int*)malloc(sizeof(int)*c_size);
-    }
+    this->r_size = r;
+    this->c_size = c;
+    this->arr = new int*[this->r_size];
+    for (int i = 0; i < this->r_size; i++)
+        this->arr[i] = new int[this->c_size];
+    //arr = (int**)malloc(sizeof(int)*r_size);
+    // for (int i = 0; i < r_size; i++)
+    // {
+    //     *(arr+i) = (int*)malloc(sizeof(int)*c_size);
+    // }
 }
 
-void Matrix::take_input()
+// void Matrix::take_input()
+// {
+//     cout<<"Enter the elements"<<endl;
+//     for (int i = 0; i < r_size; i++)
+//     {
+//         for (int j = 0; j < c_size; j++)
+//         {
+//             cin>>arr[i][j]; 
+//         } 
+//     }
+// }
+
+// Matrix Matrix::add_matrix(Matrix temp)
+// {
+//     Matrix res(this->r_size, this->c_size);
+//     for (int i = 0; i < r_size; i++)
+//     {
+//         for (int j = 0; j < c_size; j++)
+//         {
+//             res.arr[i][j] = this->arr[i][j] + temp.arr[i][j];
+//         }
+//     }
+//     return res;
+// }
+
+// void Matrix::display()
+// {
+//     for (int i = 0; i < r_size; i++)
+//     {
+//         for (int j = 0; j < c_size; j++)
+//         {
+//             cout<<this->arr[i][j]<<" ";
+//         }
+//         cout<<endl;
+//     }
+// }
+
+istream& operator>>(istream& in, const Matrix ob)
 {
-    cout<<"Enter the elements"<<endl;
-    for (int i = 0; i < r_size; i++)
+    for (int i = 0; i < ob.r_size; i++)
     {
-        for (int j = 0; j < c_size; j++)
+        for (int j = 0; j < ob.c_size; j++)
         {
-            cin>>arr[i][j]; 
-        } 
+            in>>ob.arr[i][j];  
+        }
     }
+    return in;
 }
 
-Matrix Matrix::add_matrix(Matrix temp)
+ostream& operator<<(ostream& out, const Matrix ob)
 {
-    Matrix res(this->r_size, this->c_size);
-    for (int i = 0; i < r_size; i++)
+    out<<"The array is"<<endl;
+    for (int i = 0; i < ob.r_size; i++)
     {
-        for (int j = 0; j < c_size; j++)
+        for (int j = 0; j < ob.c_size; j++)
         {
-            res.arr[i][j] = this->arr[i][j] + temp.arr[i][j];
+            out<<ob.arr[i][j]<<" ";  
+        }
+        out<<endl;
+    }
+    return out;
+}
+
+Matrix Matrix:: operator+(Matrix ob)
+{
+    Matrix res(ob.r_size, ob.c_size);
+    for (int i = 0; i < ob.r_size; i++)
+    {
+        for (int j = 0; j < ob.c_size; j++)
+        {
+            res.arr[i][j] = this->arr[i][j] + ob.arr[i][j];
+        }
+    }
+    return res;   
+}
+
+Matrix Matrix::operator-(Matrix ob)
+{
+    Matrix res(ob.r_size, ob.c_size);
+    for (int i = 0; i < ob.r_size; i++)
+    {
+        for (int j = 0; j < ob.c_size; j++)
+        {
+            res.arr[i][j] = this->arr[i][j] - ob.arr[i][j];
         }
     }
     return res;
 }
 
-void Matrix::display()
+Matrix Matrix::operator*(Matrix ob)
 {
-    for (int i = 0; i < r_size; i++)
+    Matrix res(ob.r_size, ob.c_size);
+    for (int i = 0; i < ob.r_size; i++)
     {
-        for (int j = 0; j < c_size; j++)
+        for (int j = 0; j < ob.c_size; j++)
         {
-            cout<<arr[i][j]<<" ";
+            int sum = 0;
+            for (int k = 0; k < ob.c_size; k++)
+            {
+                sum += this->arr[j][k] * ob.arr[k][i];
+            }
+            res.arr[i][j] = sum; 
         }
-        cout<<endl;
     }
+    return res;
 }
