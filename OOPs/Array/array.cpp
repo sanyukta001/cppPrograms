@@ -35,3 +35,32 @@ Array Array::add(Array temp)
     }
     return obj;
 }
+
+Array Array::operator+(Array ob)
+{
+    Array temp(ob.size);
+    for (int i = 0; i < ob.size; i++)
+    {
+        temp.arr[i] = ob.arr[i] + this->arr[i]; 
+    }
+    return temp;
+}
+
+ostream& operator<<(ostream& out, const Array& ob)
+{
+    out<<"The elements of array are : "<< endl;
+    for (int i = 0; i < ob.size; i++)
+    {
+        out<<ob.arr[i]<<" ";
+    }
+    return out;
+}
+
+istream& operator>>(istream& in, const Array& ob)
+{
+    for (int i = 0; i < ob.size; i++)
+    {
+        in>>ob.arr[i];
+    }
+    return in;
+}
