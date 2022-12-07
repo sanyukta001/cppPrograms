@@ -41,26 +41,22 @@ dates dates::operator-(int n)
     res.y = y;
     while(n)
     {
-        if(n>=365)
+        if(n >= 365)
         {
             res.y = y - 1;
             n = n - 365;
         }
-        if(n>=30)
+        if(n > 30)
         {
-            res.d = d ;
-            res.m = m - 1;
+            res.m = res.m - 1;
             n = n - 30;
         }
-        else
+        res.d = res.d - n;
+        n = n - n;
+        if(res.d <= 0)
         {
-            res.d = d - n;
-            if(res.d <= 0)
-            {
-                res.d = 30 - res.d;
-                res.m -= 1;
-            }
-            n = n - n;
+            res.d = 30 + res.d;
+            res.m = res.m - 1;
         }
     }
     return res;
@@ -73,26 +69,17 @@ dates dates::operator+(int n)
     res.y = y;
     while(n)
     {
-        if(n>=365)
+        if(n >= 365)
         {
             res.y = y + 1;
             n = n - 365;
         }
-        if(n>=30)
+        res.d += n;
+        n = n - n;
+        while(res.d > 30)
         {
-            res.d = d ;
-            res.m = m + 1;
-            n = n - 30;
-        }
-        else
-        {
-            res.d = d + n;
-            if(res.d>30)
-            {
-                res.d -= 30;
-                res.m += 1;
-            }
-            n = n - n;
+            res.d = res.d - 30;
+            res.m = res.m + 1;
         }
     }
     return res;   
