@@ -12,6 +12,7 @@ public:
     Strings(string st);
     Strings(const Strings &ob);
     Strings operator+(Strings &ob);
+    void operator==(string x);
     void input();
     void display();
 };
@@ -62,12 +63,32 @@ Strings Strings::operator+(Strings &ob)
     }
     while (j < ob.l)
     {
-
         res.s[i] = ob.s[j];
         i++;
         j++;
     }
     return res;
+}
+void Strings:: operator==(string x)
+{
+    int f = 1;
+    if(x.length() != l)
+    {
+        cout<<"Not equal"<<endl;
+        return;
+    }
+    for(int i = 0; i < x.length();i++)
+    {
+        if(x[i] != s[i])
+        {
+            f = 0;
+            break;
+        }
+    }
+    if(f == 0)
+        cout<<"Not equal"<<endl;
+    else
+        cout<<"Equal"<<endl;
 }
 void Strings::input()
 {
@@ -103,4 +124,5 @@ int main()
     // ob1.display();
     Strings res = ob + ob1;
     res.display();
+    return 0;
 }
