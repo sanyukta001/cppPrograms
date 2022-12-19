@@ -32,7 +32,7 @@ void Complex::input()
 ostream& operator<<(ostream& out,const Complex ob)
 {
     out<<"The complex number is:"<<endl;
-    out<<ob.real<<"+i"<<ob.img<<endl;
+    out<<ob.real<<"+"<<ob.img<<"i"<<endl;
     return out;
 }
 istream& operator>>(istream& in, Complex& ob)
@@ -84,8 +84,11 @@ int main()
     res1 = ob + ob1;
     res2 = ob - ob1;
     res3 = ob * ob1;
+    cout<<"After addition"<<endl;
     res1.display();
+    cout<<"After substraction"<<endl;
     res2.display();
+    cout<<"After multiplication"<<endl;
     res3.display();
     if(ob == ob1)
         cout<<"Equal"<<endl;
