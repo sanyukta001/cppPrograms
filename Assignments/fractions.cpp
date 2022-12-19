@@ -80,11 +80,11 @@ void fractions::minimise()
 int main()
 {
     fractions ob1;
-    // fractions ob2;
+     fractions ob2;
     ob1.input();
-    // ob2.input();
-    // fractions ob3 = ob1 + ob2;
-    // ob3.display();
+     ob2.input();
+     fractions ob3 = ob1 + ob2;
+     ob3.display();
     // fractions ob4 = ob1 - ob2;
     // ob4.display();
     // ob1 == ob2;
